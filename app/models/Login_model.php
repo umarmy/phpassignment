@@ -17,10 +17,14 @@ class Login_model {
 
         //Bind value
         $this->db->bind(':username', $username);
-
+        
         $row = $this->db->single();
-
-        $resultPassword = $row->password;
+        
+        if (!$row) {
+            $resultPassword = '';
+        }else {
+            $resultPassword = $row->password;
+        }        
 
         if ($password == $resultPassword) {
             return $row;
